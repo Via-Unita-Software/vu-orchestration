@@ -1,22 +1,8 @@
 {
-  "name": "@vu/orchestrator",
+  "name": "@vu/runtime",
   "version": "0.1.0",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
-    },
-    "./queue": {
-      "types": "./dist/queue.d.ts",
-      "default": "./dist/queue.js"
-    },
-    "./store": {
-      "types": "./dist/store.d.ts",
-      "default": "./dist/store.js"
-    }
-  },
   "scripts": {
     "build": "tsc",
     "test": "vitest run",
@@ -25,20 +11,22 @@
   },
   "dependencies": {
     "@vu/core": "workspace:*",
-    "@hono/node-server": "^1.13.7",
+    "@vu/orchestrator": "workspace:*",
+    "@anthropic-ai/sdk": "^0.37.0",
+    "ajv": "^8.17.1",
     "bullmq": "^5.34.4",
-    "drizzle-orm": "^0.38.3",
-    "hono": "^4.6.20",
+    "handlebars": "^4.7.8",
     "ioredis": "^5.4.2",
+    "openai": "^4.77.3",
     "pg": "^8.13.3",
-    "uuid": "^11.0.4",
+    "simple-git": "^3.27.0",
+    "drizzle-orm": "^0.38.3",
     "zod": "^3.24.1"
   },
   "devDependencies": {
+    "@types/handlebars": "^4.0.40",
     "@types/node": "^22.10.5",
     "@types/pg": "^8.11.11",
-    "@types/uuid": "^10.0.0",
-    "drizzle-kit": "^0.30.1",
     "ioredis-mock": "^8.9.0",
     "tsx": "^4.19.2",
     "typescript": "^5.7.2",
