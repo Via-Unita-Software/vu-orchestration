@@ -1,0 +1,108 @@
+# =============================================================================
+# Via Unita Orchestration - SOP Definition Template
+# =============================================================================
+# Copy this file and rename it to describe your SOP (e.g., pr-review.yaml).
+# Remove comments and unused optional fields before deploying.
+# =============================================================================
+
+# REQUIRED: Human-readable name for this SOP (used in logs and UI)
+name: your-sop-name
+
+# REQUIRED: What this SOP does
+description: A short description of what this SOP automates
+
+# REQUIRED: Semantic version of this SOP definition
+version: 1.0.0
+
+# =============================================================================
+# TRIGGER - defines which events activate this SOP
+# =============================================================================
+trigger:
+  # REQUIRED: Which adapter sources can trigger this SOP (e.g., github, jira, email)
+  source:
+    - github
+
+  # REQUIRED: Which event types from those sources trigger this SOP
+  type:
+    - pull_request.opened
+    - pull_request.synchronize
+
+  # OPTIONAL: Additional filters on event payload fields
+  # Values can be a single string or a list of accepted strings
+  filter:
+    action:
+      - opened
+      - synchronize
+    # base.ref: main   # example: only trigger on PRs targeting main
+
+# =============================================================================
+# CONTEXT - data loaders that enrich the event before prompt execution
+# =============================================================================
+context:
+  # Each entry specifies a context loader type and optional parameters
+  - type: github_pr          # loader type registered with the runtime
+    params:
+      include_diff: true     # loader-specific parameters
+      max_diff_lines: 500
+
+  # - type: jira_issue
+  #   params:
+  #     fields: [summary, description, labels]
+
+# =============================================================================
+# STEPS - the LLM prompt steps executed in sequence
+# =============================================================================
+steps:
+  - name: analyze            # REQUIRED: unique step name within this SOP
+    # REQUIRED: the prompt template (may reference context via {{variable}} syntax)
+    prompt: |
+      You are a senior software engineer reviewing a pull request.
+      PR title: {{pr.title}}
+      PR description: {{pr.body}}
+      Diff:
+      {{diff}}
+
+      Please review the changes and provide:
+      1. A summary of what changed
+      2. Any potential issues or improvements
+      3. An overall assessment (approve/request-changes/comment)
+    model: claude-3-5-sonnet-20241022   # REQUIRED: model identifier
+    max_tokens: 2048                     # REQUIRED: positive integer
+    # OPTIONAL: JSON schema name for structured output validation
+    # output_schema: pr_review_result
+
+  # Add more steps as needed; they execute in order
+  # - name: summarize
+  #   prompt: Summarize the review in one sentence.
+  #   model: claude-3-5-haiku-20241022
+  #   max_tokens: 256
+
+# =============================================================================
+# WRITEBACK - actions taken after steps complete
+# =============================================================================
+writeback:
+  - type: github             # adapter type that handles this writeback
+    action: post_comment     # action the adapter should perform
+    params:
+      # adapter-specific parameters
+      minimize_outdated: true
+
+  # - type: jira
+  #   action: add_comment
+  # - type: slack
+  #   action: send_message
+  #   params:
+  #     channel: "#code-review"
+
+# =============================================================================
+# GUARDRAILS - safety and reliability configuration
+# =============================================================================
+guardrails:
+  # Number of times to retry a failed step (default: 0)
+  max_retries: 2
+
+  # Total time budget for this SOP in seconds (default: 300)
+  timeout_seconds: 120
+
+  # If true, a human must approve before writebacks are executed (default: false)
+  require_human_approval: false

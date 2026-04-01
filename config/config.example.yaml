@@ -1,0 +1,84 @@
+# =============================================================================
+# Via Unita Orchestration - Tenant Configuration Example
+# =============================================================================
+# Copy this file to config.yaml (or the path specified via --config flag).
+# Never commit real secrets - use secret references (e.g., MY_SECRET_ENV_VAR)
+# which are resolved at runtime from the configured secrets backend.
+# =============================================================================
+
+# Basic tenant identification
+tenant:
+  id: example-company          # unique slug, used in logs and event routing
+  name: Example Company GmbH   # human-readable display name
+
+# =============================================================================
+# AI Hub (Open WebUI) connection
+# =============================================================================
+ai_hub:
+  openwebui_url: https://aihub.example.internal
+  tool_endpoints:
+    chat: /api/chat   # endpoint for standard chat completions
+    run: /api/run     # endpoint for tool/function execution
+
+# =============================================================================
+# Adapters - trigger sources and writeback targets
+# =============================================================================
+adapters:
+  # Trigger adapters receive incoming webhooks and translate them to OrchestratorEvents
+  triggers:
+    - type: github
+      webhook_secret_ref: GITHUB_WEBHOOK_SECRET   # secret name resolved at runtime
+      base_url: https://api.github.com
+
+    # - type: jira
+    #   webhook_secret_ref: JIRA_WEBHOOK_SECRET
+    #   base_url: https://yourcompany.atlassian.net
+
+    # - type: email
+    #   imap_host: imap.example.com
+    #   imap_secret_ref: EMAIL_PASSWORD
+
+  # Writeback adapters post results back to external systems
+  writebacks:
+    - type: github
+      api_token_ref: GITHUB_API_TOKEN   # secret name resolved at runtime
+
+    # - type: jira
+    #   api_token_ref: JIRA_API_TOKEN
+    #   base_url: https://yourcompany.atlassian.net
+
+    # - type: slack
+    #   bot_token_ref: SLACK_BOT_TOKEN
+
+# =============================================================================
+# LLM provider configuration
+# =============================================================================
+llm:
+  default_provider: anthropic   # which provider to use when step doesn't specify
+
+  providers:
+    anthropic:
+      api_key_ref: ANTHROPIC_API_KEY   # secret name resolved at runtime
+      # model: claude-3-5-sonnet-20241022   # optional: override default model
+
+    # openai:
+    #   api_key_ref: OPENAI_API_KEY
+    #   model: gpt-4o
+
+    # azure_openai:
+    #   api_key_ref: AZURE_OPENAI_API_KEY
+    #   base_url: https://yourinstance.openai.azure.com
+
+# =============================================================================
+# Secrets backend - how secret references are resolved
+# =============================================================================
+secrets:
+  backend: azure_keyvault   # options: azure_keyvault | env | hashicorp_vault
+  keyvault_url: https://example-ai.vault.azure.net
+
+  # For env backend (development only - reads from environment variables):
+  # backend: env
+
+  # For HashiCorp Vault:
+  # backend: hashicorp_vault
+  # vault_addr: https://vault.example.internal
