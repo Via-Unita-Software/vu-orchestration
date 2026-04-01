@@ -1,0 +1,29 @@
+{
+  "name": "@vu/adapters",
+  "version": "0.1.0",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": { "import": "./dist/index.js", "types": "./dist/index.d.ts" },
+    "./triggers": { "import": "./dist/triggers/index.js", "types": "./dist/triggers/index.d.ts" },
+    "./writebacks": { "import": "./dist/writebacks/index.js", "types": "./dist/writebacks/index.d.ts" }
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "dev": "tsc --watch"
+  },
+  "dependencies": {
+    "@vu/core": "workspace:*",
+    "node-cron": "^3.0.3",
+    "uuid": "^11.0.4",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.5",
+    "@types/node-cron": "^3.0.11",
+    "@types/uuid": "^10.0.0",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  }
+}
