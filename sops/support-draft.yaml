@@ -1,0 +1,42 @@
+name: support-draft
+description: Generates support reply drafts based on ticket content and knowledge base
+version: "1.0"
+
+trigger:
+  source:
+    - freshdesk
+    - jira
+    - http
+    - openwebui
+  type:
+    - ticket.created
+    - chat.query
+
+context:
+  - type: docs
+    params:
+      paths:
+        - docs/knowledge-base
+        - docs/faq.md
+  - type: freshdesk
+    params:
+      base_url: "${FRESHDESK_URL}"
+      api_key: "${FRESHDESK_API_KEY}"
+
+steps:
+  - name: draft
+    prompt: prompts/support-draft/draft.md
+    model: claude-sonnet-4-20250514
+    max_tokens: 2048
+
+writeback:
+  - type: freshdesk
+    action: note
+    params:
+      ticket_id: "{{event.ticket_id}}"
+      private: true
+
+guardrails:
+  max_retries: 1
+  timeout_seconds: 120
+  require_human_approval: false

@@ -1,0 +1,39 @@
+name: ticket-screener
+description: Classifies incoming tickets by type and suggests tags and group assignments
+version: "1.0"
+
+trigger:
+  source:
+    - freshdesk
+    - jira
+    - http
+  type:
+    - ticket.created
+
+context:
+  - type: freshdesk
+    params:
+      base_url: "${FRESHDESK_URL}"
+      api_key: "${FRESHDESK_API_KEY}"
+
+steps:
+  - name: classify
+    prompt: prompts/ticket-screener/classify.md
+    model: claude-sonnet-4-20250514
+    max_tokens: 1024
+    output_schema: TicketClassification
+
+writeback:
+  - type: freshdesk
+    action: tag
+    params:
+      ticket_id: "{{event.ticket_id}}"
+  - type: freshdesk
+    action: group
+    params:
+      ticket_id: "{{event.ticket_id}}"
+
+guardrails:
+  max_retries: 2
+  timeout_seconds: 60
+  require_human_approval: false

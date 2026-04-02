@@ -1,0 +1,51 @@
+name: pr-review
+description: Automatic code review for pull requests and merge requests
+version: "1.0"
+
+trigger:
+  source:
+    - github
+    - gitlab
+  type:
+    - pr.opened
+    - mr.opened
+  filter:
+    base_branch:
+      - main
+      - develop
+      - master
+
+context:
+  - type: docs
+    params:
+      paths:
+        - docs/architecture.md
+        - docs/conventions.md
+        - CONTRIBUTING.md
+  - type: http
+    params:
+      url: "{{event.diff_url}}"
+
+steps:
+  - name: review
+    prompt: prompts/pr-review/review.md
+    model: claude-sonnet-4-20250514
+    max_tokens: 4096
+
+writeback:
+  - type: github
+    action: pr_comment
+    params:
+      owner: "{{event.owner}}"
+      repo: "{{event.repo}}"
+      pr_number: "{{event.pr_number}}"
+  - type: gitlab
+    action: mr_note
+    params:
+      project_id: "{{event.project_id}}"
+      mr_iid: "{{event.mr_iid}}"
+
+guardrails:
+  max_retries: 1
+  timeout_seconds: 300
+  require_human_approval: false

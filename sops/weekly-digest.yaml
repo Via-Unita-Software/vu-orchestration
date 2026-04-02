@@ -1,0 +1,36 @@
+name: weekly-digest
+description: Engineering management digest with metrics, highlights, and risks
+version: "1.0"
+
+trigger:
+  source:
+    - schedule
+  type:
+    - schedule.weekly
+
+context:
+  - type: http
+    params:
+      url: "${GIT_STATS_URL}"
+  - type: docs
+    params:
+      paths:
+        - docs/team.md
+
+steps:
+  - name: digest
+    prompt: prompts/weekly-digest/digest.md
+    model: claude-sonnet-4-20250514
+    max_tokens: 4096
+
+writeback:
+  - type: email
+    action: send
+    params:
+      to: "${DIGEST_RECIPIENTS}"
+      subject: "Weekly Engineering Digest — {{event.week}}"
+
+guardrails:
+  max_retries: 1
+  timeout_seconds: 180
+  require_human_approval: true

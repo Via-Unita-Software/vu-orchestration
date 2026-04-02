@@ -1,0 +1,51 @@
+name: release-notes
+description: Generates structured release notes from merged PRs and commits
+version: "1.0"
+
+trigger:
+  source:
+    - github
+    - gitlab
+    - schedule
+  type:
+    - pr.merged
+    - mr.merged
+    - schedule.release
+
+context:
+  - type: http
+    params:
+      url: "{{event.compare_url}}"
+  - type: docs
+    params:
+      paths:
+        - CHANGELOG.md
+
+steps:
+  - name: generate
+    prompt: prompts/release-notes/generate.md
+    model: claude-sonnet-4-20250514
+    max_tokens: 4096
+    output_schema: ReleaseNotes
+
+writeback:
+  - type: github
+    action: file_commit
+    params:
+      owner: "{{event.owner}}"
+      repo: "{{event.repo}}"
+      path: CHANGELOG.md
+      message: "docs: update CHANGELOG for {{event.version}}"
+      branch: main
+  - type: gitlab
+    action: file_commit
+    params:
+      project_id: "{{event.project_id}}"
+      file_path: CHANGELOG.md
+      commit_message: "docs: update CHANGELOG"
+      branch: main
+
+guardrails:
+  max_retries: 1
+  timeout_seconds: 180
+  require_human_approval: false

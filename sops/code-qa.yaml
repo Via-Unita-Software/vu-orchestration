@@ -1,0 +1,31 @@
+name: code-qa
+description: Answers natural language questions about a codebase with source references
+version: "1.0"
+
+trigger:
+  source:
+    - openwebui
+    - http
+  type:
+    - chat.query
+
+context:
+  - type: repo
+    params:
+      paths:
+        - src/
+        - README.md
+        - docs/
+
+steps:
+  - name: query
+    prompt: prompts/code-qa/query.md
+    model: claude-sonnet-4-20250514
+    max_tokens: 4096
+
+writeback: []
+
+guardrails:
+  max_retries: 0
+  timeout_seconds: 120
+  require_human_approval: false
