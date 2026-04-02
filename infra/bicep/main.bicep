@@ -122,6 +122,7 @@ module aca './aca.bicep' = {
       resourceId('Microsoft.Cache/redis', '${prefix}-redis'),
       '2024-03-01'
     ).primaryKey
+    redisConnectionString: 'rediss://:${listKeys(resourceId('Microsoft.Cache/redis', '${prefix}-redis'), '2024-03-01').primaryKey}@${redis.outputs.hostName}:${string(redis.outputs.sslPort)}'
 
     // PostgreSQL
     postgresServerFqdn: postgres.outputs.serverFqdn
@@ -134,10 +135,6 @@ module aca './aca.bicep' = {
     managedIdentityClientId: keyvault.outputs.managedIdentityClientId
     managedIdentityPrincipalId: keyvault.outputs.managedIdentityPrincipalId
   }
-  // Ensure Redis is fully provisioned before ACA tries to call listKeys()
-  dependsOn: [
-    redis
-  ]
 }
 
 // ---------------------------------------------------------------------------

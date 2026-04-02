@@ -17,6 +17,9 @@ param redisPort int
 // Redis primary key passed from the redis module output (resolved in main.bicep)
 @secure()
 param redisPrimaryKey string
+// Full rediss:// connection string — constructed in main.bicep to avoid interpolation of a @secure() value here
+@secure()
+param redisConnectionString string
 
 // PostgreSQL
 param postgresServerFqdn string
@@ -258,7 +261,7 @@ resource runtimeApp 'Microsoft.App/containerApps@2024-03-01' = {
         {
           name: 'redis-connection-string'
           // rediss:// scheme for TLS — password embedded for KEDA scaler
-          value: 'rediss://:${redisPrimaryKey}@${redisHostName}:${string(redisPort)}'
+          value: redisConnectionString
         }
       ]
     }
