@@ -1,7 +1,7 @@
 import { Hono } from 'hono';
 import { cors } from 'hono/cors';
-import type { SopDefinition } from '@vu/core';
-import type { RunStore, Run } from '@vu/orchestrator/store';
+import type { SopDefinition } from '@vu-orchestration/core';
+import type { RunStore, Run } from '@vu-orchestration/orchestrator/store';
 
 export interface AdminDeps {
   runStore: RunStore;

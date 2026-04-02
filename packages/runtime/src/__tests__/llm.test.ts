@@ -5,7 +5,7 @@ import { tmpdir } from 'os';
 import type { LLMResponse } from '../llm/client.js';
 import { createLLMClient, AnthropicClient, OpenAIClient } from '../llm/client.js';
 import { PromptRenderer } from '../llm/prompt.js';
-import type { OrchestratorEvent } from '@vu/core';
+import type { OrchestratorEvent } from '@vu-orchestration/core';
 
 // Mock Anthropic SDK
 vi.mock('@anthropic-ai/sdk', () => {

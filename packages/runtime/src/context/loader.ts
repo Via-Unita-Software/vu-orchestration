@@ -1,4 +1,4 @@
-import type { ContextLoader, ContextResult, OrchestratorEvent } from '@vu/core';
+import type { ContextLoader, ContextResult, OrchestratorEvent } from '@vu-orchestration/core';
 
 export class ContextLoaderRegistry {
   private loaders = new Map<string, ContextLoader>();

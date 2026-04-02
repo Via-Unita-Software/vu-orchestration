@@ -1,7 +1,7 @@
 import Handlebars from 'handlebars';
 import { readFile } from 'fs/promises';
 import { join } from 'path';
-import type { OrchestratorEvent, ContextResult } from '@vu/core';
+import type { OrchestratorEvent, ContextResult } from '@vu-orchestration/core';
 
 export class PromptRenderer {
   private promptsDir: string;

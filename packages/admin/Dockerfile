@@ -7,12 +7,12 @@ COPY package.json pnpm-workspace.yaml pnpm-lock.yaml* ./
 COPY packages/core/package.json ./packages/core/
 COPY packages/orchestrator/package.json ./packages/orchestrator/
 COPY packages/admin/package.json ./packages/admin/
-RUN pnpm install --frozen-lockfile --filter @vu/admin...
+RUN pnpm install --frozen-lockfile --filter @vu-orchestration/admin...
 
 FROM base AS build
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-RUN pnpm build --filter @vu/admin...
+RUN pnpm build --filter @vu-orchestration/admin...
 
 FROM node:22-alpine AS runtime
 WORKDIR /app

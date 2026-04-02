@@ -1,4 +1,4 @@
-import type { ContextLoader, ContextResult, OrchestratorEvent } from '@vu/core';
+import type { ContextLoader, ContextResult, OrchestratorEvent } from '@vu-orchestration/core';
 
 export class JiraContextLoader implements ContextLoader {
   type = 'jira';

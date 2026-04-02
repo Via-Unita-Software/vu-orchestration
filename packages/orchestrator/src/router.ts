@@ -1,4 +1,4 @@
-import type { OrchestratorEvent, SopDefinition } from '@vu/core';
+import type { OrchestratorEvent, SopDefinition } from '@vu-orchestration/core';
 
 export function matchSop(
   event: OrchestratorEvent,

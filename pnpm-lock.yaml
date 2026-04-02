@@ -20,7 +20,7 @@ importers:
 
   packages/adapters:
     dependencies:
-      '@vu/core':
+      '@vu-orchestration/core':
         specifier: workspace:*
         version: link:../core
       node-cron:
@@ -54,10 +54,10 @@ importers:
       '@hono/node-server':
         specifier: ^1.13.7
         version: 1.19.12(hono@4.12.9)
-      '@vu/core':
+      '@vu-orchestration/core':
         specifier: workspace:*
         version: link:../core
-      '@vu/orchestrator':
+      '@vu-orchestration/orchestrator':
         specifier: workspace:*
         version: link:../orchestrator
       drizzle-orm:
@@ -137,7 +137,7 @@ importers:
       '@hono/node-server':
         specifier: ^1.13.7
         version: 1.19.12(hono@4.12.9)
-      '@vu/core':
+      '@vu-orchestration/core':
         specifier: workspace:*
         version: link:../core
       bullmq:
@@ -192,10 +192,10 @@ importers:
       '@anthropic-ai/sdk':
         specifier: ^0.37.0
         version: 0.37.0
-      '@vu/core':
+      '@vu-orchestration/core':
         specifier: workspace:*
         version: link:../core
-      '@vu/orchestrator':
+      '@vu-orchestration/orchestrator':
         specifier: workspace:*
         version: link:../orchestrator
       ajv:

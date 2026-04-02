@@ -1,5 +1,5 @@
 import { Queue } from 'bullmq';
-import type { OrchestratorEvent, SopDefinition } from '@vu/core';
+import type { OrchestratorEvent, SopDefinition } from '@vu-orchestration/core';
 import type { Redis } from 'ioredis';
 
 export const QUEUE_NAME = 'orchestrator:runs';

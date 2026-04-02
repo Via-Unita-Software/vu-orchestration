@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { createServer } from '../server.js';
 import type { ServerDependencies } from '../server.js';
-import type { TenantConfig, SopDefinition, TriggerAdapter, OrchestratorEvent } from '@vu/core';
+import type { TenantConfig, SopDefinition, TriggerAdapter, OrchestratorEvent } from '@vu-orchestration/core';
 import type { Run } from '../store.js';
 
 // --- Minimal mocks ---

@@ -1,7 +1,7 @@
 import { Worker } from 'bullmq';
 import type { Job } from 'bullmq';
 import type { Redis } from 'ioredis';
-import type { TenantConfig } from '@vu/core';
+import type { TenantConfig } from '@vu-orchestration/core';
 import { ContextLoaderRegistry } from './context/loader.js';
 import { WritebackAdapterRegistry } from './writeback/registry.js';
 import { PromptRenderer } from './llm/prompt.js';
@@ -9,12 +9,12 @@ import { validateOutput } from './llm/guard.js';
 import { createLLMClient } from './llm/client.js';
 
 // Import queue types from subpath to avoid pulling in the Hono server entry point
-import type { RunJobData } from '@vu/orchestrator/queue';
-import { QUEUE_NAME } from '@vu/orchestrator/queue';
-import type { RunStore } from '@vu/orchestrator/store';
+import type { RunJobData } from '@vu-orchestration/orchestrator/queue';
+import { QUEUE_NAME } from '@vu-orchestration/orchestrator/queue';
+import type { RunStore } from '@vu-orchestration/orchestrator/store';
 
-export type { RunJobData } from '@vu/orchestrator/queue';
-export type { RunStore } from '@vu/orchestrator/store';
+export type { RunJobData } from '@vu-orchestration/orchestrator/queue';
+export type { RunStore } from '@vu-orchestration/orchestrator/store';
 
 export interface WorkerDeps {
   redis: Redis;

@@ -1,6 +1,6 @@
 import type { Context } from 'hono';
-import type { TriggerAdapter } from '@vu/core';
-import type { IncomingRequest } from '@vu/core';
+import type { TriggerAdapter } from '@vu-orchestration/core';
+import type { IncomingRequest } from '@vu-orchestration/core';
 
 export async function validateWebhookSignature(
   adapterType: string,

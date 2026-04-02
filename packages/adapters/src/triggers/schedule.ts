@@ -1,6 +1,6 @@
 import cron from 'node-cron';
-import { createEvent } from '@vu/core';
-import type { OrchestratorEvent } from '@vu/core';
+import { createEvent } from '@vu-orchestration/core';
+import type { OrchestratorEvent } from '@vu-orchestration/core';
 
 export interface CronDefinition {
   name: string;

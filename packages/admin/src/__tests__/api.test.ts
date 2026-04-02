@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { createAdminApp } from '../server/api.js';
-import type { RunStore, Run } from '@vu/orchestrator/store';
-import type { SopDefinition } from '@vu/core';
+import type { RunStore, Run } from '@vu-orchestration/orchestrator/store';
+import type { SopDefinition } from '@vu-orchestration/core';
 
 const TEST_API_KEY = 'test-api-key';
 

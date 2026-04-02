@@ -4,7 +4,7 @@ import { join } from 'path';
 import { tmpdir } from 'os';
 import { ContextLoaderRegistry } from '../context/loader.js';
 import { DocsContextLoader } from '../context/docs.js';
-import type { ContextLoader, ContextResult, OrchestratorEvent } from '@vu/core';
+import type { ContextLoader, ContextResult, OrchestratorEvent } from '@vu-orchestration/core';
 
 const mockEvent: OrchestratorEvent = {
   id: '00000000-0000-0000-0000-000000000001',

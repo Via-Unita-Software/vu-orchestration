@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { matchSop } from '../router.js';
-import type { OrchestratorEvent, SopDefinition } from '@vu/core';
+import type { OrchestratorEvent, SopDefinition } from '@vu-orchestration/core';
 
 function makeEvent(overrides: Partial<OrchestratorEvent> = {}): OrchestratorEvent {
   return {

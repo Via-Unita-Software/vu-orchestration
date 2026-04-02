@@ -1,6 +1,6 @@
 import { readFile, readdir, stat } from 'fs/promises';
 import { join, extname } from 'path';
-import type { ContextLoader, ContextResult, OrchestratorEvent } from '@vu/core';
+import type { ContextLoader, ContextResult, OrchestratorEvent } from '@vu-orchestration/core';
 
 export class DocsContextLoader implements ContextLoader {
   type = 'docs';

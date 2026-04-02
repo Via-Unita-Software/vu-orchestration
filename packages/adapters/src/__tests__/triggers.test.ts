@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { createHmac } from 'crypto';
-import { orchestratorEventSchema } from '@vu/core';
+import { orchestratorEventSchema } from '@vu-orchestration/core';
 import { HttpTriggerAdapter } from '../triggers/http.js';
 import { GitHubTriggerAdapter } from '../triggers/github.js';
 import { GitLabTriggerAdapter } from '../triggers/gitlab.js';
@@ -469,7 +469,7 @@ describe('ScheduleTriggerAdapter', () => {
     });
 
     // Manually build the event using the same logic as the adapter to test the structure
-    const { createEvent } = await import('@vu/core');
+    const { createEvent } = await import('@vu-orchestration/core');
     const event = createEvent({
       source: 'schedule',
       sourceEventId: `daily-report:${Date.now()}`,
@@ -503,7 +503,7 @@ describe('ScheduleTriggerAdapter', () => {
 
   it('calls onEvent callback when cron fires (mocked cron)', async () => {
     // We test the event structure by simulating what the cron callback does
-    const { createEvent, orchestratorEventSchema } = await import('@vu/core');
+    const { createEvent, orchestratorEventSchema } = await import('@vu-orchestration/core');
 
     const receivedEvents: unknown[] = [];
     const onEvent = async (event: unknown) => {

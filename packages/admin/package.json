@@ -1,5 +1,5 @@
 {
-  "name": "@vu/admin",
+  "name": "@vu-orchestration/admin",
   "version": "0.1.0",
   "main": "./dist/server/index.js",
   "scripts": {
@@ -10,8 +10,8 @@
     "dev": "tsx watch src/server/index.ts"
   },
   "dependencies": {
-    "@vu/core": "workspace:*",
-    "@vu/orchestrator": "workspace:*",
+    "@vu-orchestration/core": "workspace:*",
+    "@vu-orchestration/orchestrator": "workspace:*",
     "@hono/node-server": "^1.13.7",
     "drizzle-orm": "^0.38.3",
     "hono": "^4.6.20",

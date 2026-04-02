@@ -1,4 +1,4 @@
-import type { WritebackAdapter, WritebackAction, WritebackResult } from '@vu/core';
+import type { WritebackAdapter, WritebackAction, WritebackResult } from '@vu-orchestration/core';
 
 export interface GitLabWritebackConfig {
   apiToken: string;

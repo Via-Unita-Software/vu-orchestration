@@ -2,7 +2,7 @@ import simpleGit from 'simple-git';
 import { readFile, mkdtemp, rm } from 'fs/promises';
 import { join } from 'path';
 import { tmpdir } from 'os';
-import type { ContextLoader, ContextResult, OrchestratorEvent } from '@vu/core';
+import type { ContextLoader, ContextResult, OrchestratorEvent } from '@vu-orchestration/core';
 
 export class RepoContextLoader implements ContextLoader {
   type = 'repo';

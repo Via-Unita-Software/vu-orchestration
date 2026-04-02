@@ -1,6 +1,6 @@
 import { Hono } from 'hono';
 import { v4 as uuidv4 } from 'uuid';
-import type { TenantConfig, SopDefinition, TriggerAdapter } from '@vu/core';
+import type { TenantConfig, SopDefinition, TriggerAdapter } from '@vu-orchestration/core';
 import { DedupService } from './dedup.js';
 import { RunQueue } from './queue.js';
 import { RunStore } from './store.js';
@@ -126,7 +126,7 @@ export function createServer(deps: ServerDependencies): Hono {
       return c.json({ error: 'Missing event in request body' }, 400);
     }
 
-    const event = eventData as import('@vu/core').OrchestratorEvent;
+    const event = eventData as import('@vu-orchestration/core').OrchestratorEvent;
 
     // Deduplication
     const isDup = await dedup.isDuplicate(event.meta?.deduplicationKey ?? event.id);
@@ -185,7 +185,7 @@ export function createServer(deps: ServerDependencies): Hono {
       return c.json({ error: 'Missing event in request body' }, 400);
     }
 
-    const event = eventData as import('@vu/core').OrchestratorEvent;
+    const event = eventData as import('@vu-orchestration/core').OrchestratorEvent;
 
     // Deduplication
     const isDup = await dedup.isDuplicate(event.meta?.deduplicationKey ?? event.id);

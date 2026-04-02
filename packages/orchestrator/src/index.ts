@@ -1,7 +1,7 @@
 import { serve } from '@hono/node-server';
 import { Redis } from 'ioredis';
 import { Pool } from 'pg';
-import { loadConfig, loadSops } from '@vu/core';
+import { loadConfig, loadSops } from '@vu-orchestration/core';
 import { DedupService } from './dedup.js';
 import { RunQueue } from './queue.js';
 import { RunStore, createDb } from './store.js';

@@ -1,5 +1,5 @@
-import { createEvent } from '@vu/core';
-import type { TriggerAdapter, IncomingRequest, OrchestratorEvent } from '@vu/core';
+import { createEvent } from '@vu-orchestration/core';
+import type { TriggerAdapter, IncomingRequest, OrchestratorEvent } from '@vu-orchestration/core';
 
 export interface GitLabTriggerConfig {
   tenant: string;

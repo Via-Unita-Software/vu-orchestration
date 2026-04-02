@@ -1,4 +1,4 @@
-import type { WritebackAdapter, WritebackAction, WritebackResult } from '@vu/core';
+import type { WritebackAdapter, WritebackAction, WritebackResult } from '@vu-orchestration/core';
 
 export class WritebackAdapterRegistry {
   private adapters = new Map<string, WritebackAdapter>();

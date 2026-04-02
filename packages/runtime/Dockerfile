@@ -7,12 +7,12 @@ COPY package.json pnpm-workspace.yaml pnpm-lock.yaml* ./
 COPY packages/core/package.json ./packages/core/
 COPY packages/orchestrator/package.json ./packages/orchestrator/
 COPY packages/runtime/package.json ./packages/runtime/
-RUN pnpm install --frozen-lockfile --filter @vu/runtime...
+RUN pnpm install --frozen-lockfile --filter @vu-orchestration/runtime...
 
 FROM base AS build
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-RUN pnpm build --filter @vu/runtime...
+RUN pnpm build --filter @vu-orchestration/runtime...
 
 FROM node:22-alpine AS runtime
 RUN apk add --no-cache git

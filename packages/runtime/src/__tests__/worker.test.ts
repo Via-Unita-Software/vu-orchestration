@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import type { RunJobData } from '../worker.js';
 import { WritebackAdapterRegistry } from '../writeback/registry.js';
 import { ContextLoaderRegistry } from '../context/loader.js';
-import type { WritebackAdapter, OrchestratorEvent, SopDefinition } from '@vu/core';
+import type { WritebackAdapter, OrchestratorEvent, SopDefinition } from '@vu-orchestration/core';
 
 // Mock BullMQ so creating a Worker doesn't try to connect to Redis
 vi.mock('bullmq', () => ({

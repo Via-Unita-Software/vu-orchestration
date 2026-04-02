@@ -1,8 +1,8 @@
 import { Redis } from 'ioredis';
 import { Pool } from 'pg';
-import { loadConfig } from '@vu/core';
-import { createDb } from '@vu/orchestrator/store';
-import { RunStore } from '@vu/orchestrator/store';
+import { loadConfig } from '@vu-orchestration/core';
+import { createDb } from '@vu-orchestration/orchestrator/store';
+import { RunStore } from '@vu-orchestration/orchestrator/store';
 import { ContextLoaderRegistry } from './context/loader.js';
 import { RepoContextLoader } from './context/repo.js';
 import { DocsContextLoader } from './context/docs.js';

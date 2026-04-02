@@ -1,8 +1,8 @@
 import { serve } from '@hono/node-server';
 import { serveStatic } from '@hono/node-server/serve-static';
 import { Pool } from 'pg';
-import { loadSops } from '@vu/core';
-import { RunStore, createDb } from '@vu/orchestrator/store';
+import { loadSops } from '@vu-orchestration/core';
+import { RunStore, createDb } from '@vu-orchestration/orchestrator/store';
 import { createAdminApp } from './api.js';
 
 async function main() {

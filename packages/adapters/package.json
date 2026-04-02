@@ -1,5 +1,5 @@
 {
-  "name": "@vu/adapters",
+  "name": "@vu-orchestration/adapters",
   "version": "0.1.0",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -14,7 +14,7 @@
     "dev": "tsc --watch"
   },
   "dependencies": {
-    "@vu/core": "workspace:*",
+    "@vu-orchestration/core": "workspace:*",
     "node-cron": "^3.0.3",
     "uuid": "^11.0.4",
     "zod": "^3.24.1"
